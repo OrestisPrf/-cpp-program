@@ -1,0 +1,119 @@
+#include<iostream>
+using namespace std ;
+//creating class 
+class robot 
+{
+    public:
+      robot(string set_callsign,int set_battery); //using constructor method
+      string get_callsign(); // creating accessors to retrieve data form private variables
+      int get_battery();
+      int get_charge();
+      void moveForward();
+      void turnLeft();
+      void turnRight();
+      void sayHello();
+    private:
+      string callsign;
+      int  battery = 500 ;
+      int charge = 300 ;
+};
+//end of class
+
+int main()
+{
+    char x[60]; //creating a string to input users answer
+    cout<<"Give a callsign:";
+    cin>>x;
+    robot takis(x,50) ; 
+    takis.moveForward();
+    takis.turnLeft();
+    takis.moveForward();
+    takis.turnRight();
+    takis.sayHello();
+    takis.moveForward();
+    takis.turnLeft();
+    takis.sayHello();
+    takis.turnRight();
+    takis.moveForward();
+    takis.sayHello();
+    takis.turnLeft();
+    takis.sayHello();
+    return 0;
+}
+//end of main
+//adjusting constructor method
+robot::robot(string set_callsign,int set_battery)
+{
+    callsign=set_callsign;
+    battery=set_battery;
+};
+//adjusting accessors
+string robot::get_callsign()
+{
+    return callsign ;
+}
+
+int robot::get_battery()
+{
+    return battery;
+}
+
+int robot::get_charge()
+{
+    return battery+=charge;
+}
+//setting up robots commands
+void robot::moveForward()
+{
+  if (battery > 50)
+  {
+    battery-=100;
+    cout<<endl<<"Moving forward !!----->battery:"<<get_battery();
+  } 
+  else
+    {
+         cout<<endl<<"CHARGING..."<<get_charge()<<"---->batery:"<<get_battery();
+         moveForward(); //using recursive function to repeat the same command
+    }
+}
+void robot::turnLeft()
+{
+    if (battery > 50)
+    {
+     battery-=50;
+     cout<<endl<<"Turning 90 degrees left !!-----> battery:"<<get_battery(); 
+    } 
+    else
+   {
+     cout<<endl<<"CHARGING..."<<get_charge()<<"---->batery:"<<get_battery();
+     turnLeft();
+   } 
+}
+void robot::turnRight()
+{
+    if (battery > 50)
+    {
+        battery-=50;
+        cout<<endl<<"Turning 90 degrees right !!---->battery:"<<get_battery();
+    }
+    else
+    {
+       cout<<endl<<"CHARGING..."<<get_charge()<<"---->batery:"<<get_battery();
+       turnRight();
+    }      
+}
+
+void robot::sayHello()
+{
+    if (battery > 50)
+    {
+        battery-= 75;
+        cout<<endl<<"Hello my friend,my callsign is ("<<get_callsign()<<")---> battery:"<<get_battery();
+    }
+    else
+    {
+     cout<<endl<<"CHARGING..."<<get_charge()<<"---->batery:"<<get_battery();
+     sayHello(); 
+    }
+}    
+//end 
